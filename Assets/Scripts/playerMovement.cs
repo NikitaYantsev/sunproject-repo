@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
+//GITHUB TEST
 public class playerMovement : MonoBehaviour
 {
     [SerializeField] public float moveSpeed = 7f;

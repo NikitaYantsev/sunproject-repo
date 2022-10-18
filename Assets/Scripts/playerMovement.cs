@@ -1,12 +1,11 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 //GITHUB TEST
-public class playerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] public float moveSpeed = 7f;
-    [SerializeField] public float jumpHeight = 13f;
-    [SerializeField] public float rollDistance = 7f;
+    [SerializeField] float moveSpeed = 7f;
+    [SerializeField] float jumpHeight = 13f;
+    [SerializeField] float rollDistance = 7f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] float wallSlidingSpeed = 0.8f;
@@ -48,28 +47,27 @@ public class playerMovement : MonoBehaviour
         }
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space)) // grounded
+        if (Input.GetKeyDown(KeyCode.Space)) 
         {
             Jump();
         }
 
         
         //Roll
-        if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded()) // grounded 
+        if (Input.GetKeyDown(KeyCode.LeftShift) && IsGrounded()) 
         {
             StartCoroutine(Roll());
         }
 
         //Set animator parameters
-        print(isGrounded());
         animator.SetBool("isRunning", horizontalInput != 0);
-        animator.SetBool("isGrounded", isGrounded()); // grounded
-        animator.SetBool("isClimbing", isClimbing());
+        animator.SetBool("isGrounded", IsGrounded()); 
+        animator.SetBool("isClimbing", IsClimbing());
     }
 
     private void FixedUpdate()
     {
-        if (isClimbing())
+        if (IsClimbing())
         {
             body.velocity = new Vector2(body.velocity.x, Mathf.Clamp(body.velocity.y, -wallSlidingSpeed, float.MaxValue));
         }
@@ -77,12 +75,12 @@ public class playerMovement : MonoBehaviour
 
     void Jump() // IN PROGRESS
     {
-        if (isGrounded() && !isRolling && !onWall())
+        if (IsGrounded() && !isRolling && !OnWall())
         {
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
             animator.SetTrigger("jump");
         }
-        else if (isClimbing()) 
+        else if (IsClimbing()) 
         {
             if (horizontalInput == 0)
             {
@@ -107,20 +105,20 @@ public class playerMovement : MonoBehaviour
         animator.SetBool("isRolling", isRolling);
     }
 
-    private bool isGrounded()
+    private bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.2f, groundLayer);
         return raycastHit.collider != null;
     }
 
-    private bool onWall()
+    private bool OnWall()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.2f, wallLayer);
         return raycastHit.collider != null;
     }
 
-    private bool isClimbing()
+    private bool IsClimbing()
     {
-        return !isGrounded() && onWall();
+        return !IsGrounded() && OnWall();
     }
 }

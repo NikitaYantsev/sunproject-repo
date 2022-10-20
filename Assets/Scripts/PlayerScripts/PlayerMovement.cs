@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    IEnumerator Roll()
+    IEnumerator Roll() //DOESN'T WORK CORRECTLY WHILE SPAMMING LSHIFT, CAN ROLL WHILE ATTACKING
     {
         isRolling = true;
         animator.SetBool("isRolling", isRolling);

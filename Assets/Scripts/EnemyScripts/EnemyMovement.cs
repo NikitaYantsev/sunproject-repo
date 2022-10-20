@@ -24,10 +24,13 @@ public class EnemyMovement : MonoBehaviour
     {
         //if (isInFightMode)
         
+        //Run
         movementDirection = (Player.transform.position - transform.position).normalized;
         print(movementDirection);
         body.velocity = new Vector2(movementDirection[0] * moveSpeed, body.velocity.y);
         animator.SetBool("IsRunning", body.velocity[0] != 0);
-        
+
+        //Rotate
+        //transform.localScale = new Vector3(Mathf.Sign(body.velocity[0]) * );
     }
 }

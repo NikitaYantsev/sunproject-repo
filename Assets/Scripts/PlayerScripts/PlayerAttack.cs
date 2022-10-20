@@ -18,7 +18,6 @@ public class PlayerAttack : MonoBehaviour
     public float nextAttackTime = 0f;
     //KeyCode lastKeyCode;
 
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -69,6 +68,7 @@ public class PlayerAttack : MonoBehaviour
             doSecondAttack = false;
             attackTiming = 0;
         }
+
         //first attack
         if (!doSecondAttack)
         { 
@@ -91,7 +91,6 @@ public class PlayerAttack : MonoBehaviour
             case 3:
                 animator.SetTrigger("Attack3");
                 break;
-
         }
         
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
@@ -100,7 +99,6 @@ public class PlayerAttack : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
         }
         attackTiming = 0;
-        doSecondAttack = true;
     }
 
     private void OnDrawGizmosSelected()

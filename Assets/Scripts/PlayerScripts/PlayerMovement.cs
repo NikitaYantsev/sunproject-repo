@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump() // IN PROGRESS
     {
-        if (IsGrounded() && !isRolling && !OnWall())
+        if (IsGrounded() && !isRolling)
         {
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
             animator.SetTrigger("jump");
@@ -89,20 +89,17 @@ public class PlayerMovement : MonoBehaviour
             else
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
         }
-
     }
 
     IEnumerator Roll() //DOESN'T WORK CORRECTLY WHILE SPAMMING LSHIFT, CAN ROLL WHILE ATTACKING
     {
         isRolling = true;
-        animator.SetBool("isRolling", isRolling);
         animator.SetTrigger("roll");
         body.velocity = new Vector2(body.velocity.x, 0f);
         body.AddForce(new Vector2(rollDistance * transform.localScale.x, 0f), ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
         animator.ResetTrigger("roll");
         isRolling = false;
-        animator.SetBool("isRolling", isRolling);
     }
 
     private bool IsGrounded()

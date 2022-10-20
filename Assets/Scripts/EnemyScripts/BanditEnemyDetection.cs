@@ -19,9 +19,8 @@ public class BanditEnemyDetection : MonoBehaviour
     {
         character = Physics2D.OverlapBox(detectionPoint.position, detectionRange, 0, playerLayer);
         return character;
-        
-
     }
+
     private void OnDrawGizmosSelected()
     {
         if (detectionPoint == null)

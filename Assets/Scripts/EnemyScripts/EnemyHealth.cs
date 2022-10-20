@@ -17,7 +17,6 @@ public class EnemyHealth : MonoBehaviour
         animator = GetComponent<Animator>();    
         currentHealth = maxHealth;
         body.freezeRotation = true; // need to be removed
-
     }
 
     public void TakeDamage(float damage)
@@ -33,7 +32,6 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-
         print("He died" );
         animator.SetBool("IsDead", true);
         
@@ -42,6 +40,5 @@ public class EnemyHealth : MonoBehaviour
         GetComponent<EnemyMovement>().enabled = false;
         body.gravityScale = 0;
         this.enabled = false;
-        
     }
 }

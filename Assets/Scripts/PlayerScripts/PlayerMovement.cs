@@ -95,10 +95,12 @@ public class PlayerMovement : MonoBehaviour
     {
         isRolling = true;
         animator.SetTrigger("roll");
+        animator.SetBool("isRolling", true);
         body.velocity = new Vector2(body.velocity.x, 0f);
         body.AddForce(new Vector2(rollDistance * transform.localScale.x, 0f), ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
         animator.ResetTrigger("roll");
+        animator.SetBool("isRolling", false);
         isRolling = false;
     }
 

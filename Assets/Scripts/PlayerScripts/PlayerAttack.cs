@@ -15,7 +15,6 @@ public class PlayerAttack : MonoBehaviour
     public float attackDamage = 40;
     public float lowBracket = 0.5f;
     public float highBracket = 0.6f;
-    public float nextAttackTime = 0f;
     //KeyCode lastKeyCode;
 
     private void Awake()
@@ -37,7 +36,6 @@ public class PlayerAttack : MonoBehaviour
             }
         }
         attackTiming += Time.deltaTime;
-        nextAttackTime += Time.deltaTime;
     }   
 
     void AttackController()

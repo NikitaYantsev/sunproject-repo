@@ -2,35 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : StateMachineBehaviour
 {
-    Animator animator;
+
+    public float speed = 2.5f;
+    public float attackRange = 3f;
+
+    UnityEngine.Transform player;
     Rigidbody2D body;
-    public float moveSpeed = 5f;
-    public bool isInFightMode;
-    public GameObject Player;
-    Vector2 movementDirection;
+    EnemyRotate rotate;
 
-    // Start is called before the first frame update
-    void Start()
+
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        body = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        body = animator.GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //if (isInFightMode)
-        
-        //Run
-        movementDirection = (Player.transform.position - transform.position).normalized;
-        print(movementDirection);
-        body.velocity = new Vector2(movementDirection[0] * moveSpeed, body.velocity.y);
-        animator.SetBool("IsRunning", body.velocity[0] != 0);
+        rotate.LookAtPlayer();
+        Vector2 target = new Vector2(player.position.x, body.position.y);
+        Vector2 newPos = Vector2.MoveTowards(body.position, target, speed * Time.fixedDeltaTime);
+        body.MovePosition(newPos);
 
-        //Rotate
-        //transform.localScale = new Vector3(Mathf.Sign(body.velocity[0]) * );
+        if (Vector2.Distance(player.position, body.position) <= attackRange)
+        {
+            animator.SetTrigger("Attack");
+        }
     }
+
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        animator.ResetTrigger("Attack");
+    }
+
 }

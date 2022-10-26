@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class EnemyHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float maxHealth = 100;
+    public float maxHealth = 300;
     float currentHealth;
-    Rigidbody2D body;
     public Animator animator;
+    public Rigidbody2D body;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         body = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();    
         currentHealth = maxHealth;
     }
 
@@ -31,15 +30,14 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        print("He died" );
+        print("You dead");
         animator.SetBool("IsDead", true);
-        
+
         GetComponent<Collider2D>().enabled = false;
-        GetComponent<BanditEnemyDetection>().enabled = false;
-        GetComponent<EnemyAttack>().enabled = false;
-        //GetComponent<EnemyMovement>().enabled = false;
+        GetComponent<PlayerMovement>().enabled = false;
         body.gravityScale = 0;
         body.velocity = Vector3.zero;
         this.enabled = false;
     }
 }
+

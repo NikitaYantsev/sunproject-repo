@@ -7,15 +7,15 @@ public class BanditEnemyDetection : MonoBehaviour
     public Transform detectionPoint;
     public Vector2 detectionRange = new Vector2(4, 1);
     public LayerMask playerLayer;
-    Collider2D character;
+    Collider2D character; 
+    Animator animator;
 
-    // Update is called once per frame
-    private void FixedUpdate()
+    private void Start()
     {
-        DetectEnemies();
+        animator = GetComponent<Animator>();
     }
 
-    bool DetectEnemies()
+    public bool DetectEnemies()
     {
         character = Physics2D.OverlapBox(detectionPoint.position, detectionRange, 0, playerLayer);
         return character;

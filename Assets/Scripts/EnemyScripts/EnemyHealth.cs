@@ -14,8 +14,9 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();    
+        animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+        body.freezeRotation = true;
     }
 
     public void TakeDamage(float damage)
@@ -31,9 +32,9 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        print("He died" );
+        print("He died");
         animator.SetBool("IsDead", true);
-        
+
         GetComponent<Collider2D>().enabled = false;
         GetComponent<BanditEnemyDetection>().enabled = false;
         GetComponent<EnemyAttack>().enabled = false;

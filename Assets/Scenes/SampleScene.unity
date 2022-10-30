@@ -674,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285071303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.51, y: -4.5, z: -0.0312}
+  m_LocalPosition: {x: -9.65, y: -4.33, z: -0.0312}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -892,7 +892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327293861}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.68, y: 1.83, z: -0.084434964}
+  m_LocalPosition: {x: -13, y: 1.88, z: -0.084434964}
   m_LocalScale: {x: 1.047975, y: 8.115204, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -916,6 +916,7 @@ GameObject:
   - component: {fileID: 341816958}
   - component: {fileID: 341816960}
   - component: {fileID: 341816961}
+  - component: {fileID: 341816962}
   m_Layer: 8
   m_Name: Bandit
   m_TagString: Untagged
@@ -1037,7 +1038,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9c497a4ce1f356b448c0dd3eca091d35, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1050,9 +1051,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341816951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.09, y: -4.5, z: 0.12780824}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 5.84, y: -4.34, z: 0.12780824}
+  m_LocalScale: {x: -2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1193989354}
   - {fileID: 1202430340}
@@ -1107,7 +1108,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
-  attackDamage: 10
+  attackDamage: 300
 --- !u!114 &341816961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1121,7 +1122,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 285071306}
-  isFlipped: 0
+  inBattle: 0
+--- !u!61 &341816962
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341816951}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.7, y: 0.1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.5, y: 1.5}
+    newSize: {x: 1.5, y: 1.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!1 &411720531
 GameObject:
   m_ObjectHideFlags: 0
@@ -2949,7 +2976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879952274}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.9, y: 1.84, z: -0.084434964}
+  m_LocalPosition: {x: 18.27, y: 2.2, z: -0.084434964}
   m_LocalScale: {x: 1.047975, y: 8.115205, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

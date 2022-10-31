@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     public Transform attackPoint;
-    public float attackRange = 100;
+    [SerializeField] float attackRange = 1;
     public LayerMask playerLayer;
 
     public float attackDamage;

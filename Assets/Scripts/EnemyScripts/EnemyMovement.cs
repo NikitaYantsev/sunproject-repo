@@ -41,6 +41,7 @@ public class EnemyMovement : StateMachineBehaviour
         }
         else
         {
+            animator.SetBool("inBattle", inBattle);
             rotate.LookAtPlayer();
             Vector2 target = new(player.position.x, body.position.y);
             Vector2 newPos = Vector2.MoveTowards(body.position, target, speed * 2 * Time.fixedDeltaTime);

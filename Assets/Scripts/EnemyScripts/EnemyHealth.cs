@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -34,7 +31,6 @@ public class EnemyHealth : MonoBehaviour
     {
         print("He died");
         animator.SetBool("IsDead", true);
-
         GetComponent<Collider2D>().enabled = false;
         GetComponent<BanditEnemyDetection>().enabled = false;
         GetComponent<EnemyAttack>().enabled = false;

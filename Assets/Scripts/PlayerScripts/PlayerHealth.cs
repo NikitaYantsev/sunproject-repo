@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float maxHealth = 300;
-    float currentHealth;
+    public float maxHealth = 3;
+    public float currentHealth;
     public Animator animator;
     public Rigidbody2D body;
 
@@ -32,7 +32,6 @@ public class PlayerHealth : MonoBehaviour
     {
         print("You dead");
         animator.SetBool("IsDead", true);
-
         GetComponent<Collider2D>().enabled = false;
         GetComponent<PlayerMovement>().enabled = false;
         body.gravityScale = 0;

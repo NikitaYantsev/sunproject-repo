@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-//GITHUB TEST
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 7f;
@@ -9,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] float wallSlidingSpeed = 0.8f;
+    [SerializeField] private PlayerStamina stamina;
     public float wallJumpDuration;
     public Vector2 wallJumpForce;
     private Rigidbody2D body;
@@ -18,12 +18,13 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     
     // private bool grounded;
-    void Awake()
+    void Start()
     {
         //Grab components from other objects
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        stamina = GetComponent<PlayerStamina>();
         body.freezeRotation = true;
     }
     

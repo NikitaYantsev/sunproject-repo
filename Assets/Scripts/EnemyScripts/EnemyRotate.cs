@@ -31,8 +31,6 @@ public class EnemyRotate : MonoBehaviour
     {
         if (!inBattle)
         {
-            print(transform.localScale.x);
-            print(-Mathf.Sign(transform.localScale.x));
             transform.localScale = new(-transform.localScale.x, transform.localScale.y);
             GetComponent<Animator>().SetTrigger("Idle");
         }

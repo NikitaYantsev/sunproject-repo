@@ -1,21 +1,28 @@
 using System.Collections;
+using UnityEditor.UIElements;
 using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
+    float horizontalInput;
+
     [SerializeField] float moveSpeed = 7f;
     [SerializeField] float jumpHeight = 13f;
     [SerializeField] float rollDistance = 7f;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask wallLayer;
     [SerializeField] float wallSlidingSpeed = 0.8f;
-    [SerializeField] private PlayerStamina stamina;
-    public float wallJumpDuration;
-    public Vector2 wallJumpForce;
+    [SerializeField] float sprintSpeed;
+    float shiftCountdown;
+    //public float wallJumpDuration;
+
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask wallLayer;
+
+    private PlayerStamina stamina;
     private Rigidbody2D body;
     private Animator animator;
     private BoxCollider2D boxCollider;
+
     bool isRolling;
-    float horizontalInput;
+
     
     // private bool grounded;
     void Start()
@@ -26,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         stamina = GetComponent<PlayerStamina>();
         body.freezeRotation = true;
+        sprintSpeed = moveSpeed * 1.3f;
     }
     
     private void Update()
@@ -33,32 +41,37 @@ public class PlayerMovement : MonoBehaviour
         //Horizontal movement
         horizontalInput = Input.GetAxis("Horizontal");
         if (!isRolling)
-        {
             body.velocity = new Vector2(horizontalInput * moveSpeed, body.velocity.y);
+
+        //Actions with LShift pressed
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            shiftCountdown += Time.deltaTime; //timer to detect how long LShift is pressed
+            if (!isRolling && IsGrounded() && shiftCountdown > 0.3f) //if LShift is pressed longer than 0.3 sec, sprint
+                body.velocity = new Vector2(horizontalInput * sprintSpeed, body.velocity.y);
         }
+        else if (Input.GetKeyUp(KeyCode.LeftShift) && shiftCountdown < 0.3f) //if LShift is pressed longer than 0.3 sec
+        {
+            if (IsGrounded() && !isRolling && stamina.currentStamina > 2.5f) //and current state is suitable for rolling, sprint
+                StartCoroutine(Roll());
+        }
+        else
+            shiftCountdown = 0;
 
         //Rotate character when moving
         if (horizontalInput > 0.01f)
-        {
             transform.localScale = new Vector3(2, 2, 2);
-        }
+
         if (horizontalInput < -0.01f)
-        {
             transform.localScale = new Vector3(-2, 2, 2);
-        }
 
         //Jump
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             Jump();
-        }
 
         
         //Roll
-        if (Input.GetKeyDown(KeyCode.LeftShift) && IsGrounded()) 
-        {
-            StartCoroutine(Roll());
-        }
+
 
         //Set animator parameters
         animator.SetBool("isRunning", horizontalInput != 0);
@@ -69,40 +82,38 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (IsClimbing())
-        {
             body.velocity = new Vector2(body.velocity.x, Mathf.Clamp(body.velocity.y, -wallSlidingSpeed, float.MaxValue));
-        }
     }
 
-    void Jump() // IN PROGRESS
+    void Jump() 
     {
         if (IsGrounded() && !isRolling)
         {
             body.velocity = new Vector2(body.velocity.x, jumpHeight);
             animator.SetTrigger("jump");
         }
-        else if (IsClimbing()) 
+        else if (IsClimbing())  // IN PROGRESS
         {
             if (horizontalInput == 0)
-            {
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
-            }
             else
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
         }
     }
 
-    IEnumerator Roll() //DOESN'T WORK CORRECTLY WHILE SPAMMING LSHIFT, CAN ROLL WHILE ATTACKING
+    IEnumerator Roll() //CAN ROLL WHILE ATTACKING
     {
         isRolling = true;
-        animator.SetTrigger("roll");
-        animator.SetBool("isRolling", true);
-        body.velocity = new Vector2(body.velocity.x, 0f);
+        animator.SetBool("isRolling", isRolling);
+
+        body.velocity = new Vector2(0f, 0f);
         body.AddForce(new Vector2(rollDistance * transform.localScale.x, 0f), ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
-        animator.ResetTrigger("roll");
-        animator.SetBool("isRolling", false);
+
         isRolling = false;
+        animator.SetBool("isRolling", isRolling);
+        
+        
     }
 
     private bool IsGrounded()

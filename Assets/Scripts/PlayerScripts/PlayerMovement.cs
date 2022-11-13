@@ -33,12 +33,12 @@ public class PlayerMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         stamina = GetComponent<PlayerStamina>();
         body.freezeRotation = true;
-        sprintSpeed = moveSpeed * 1.3f;
     }
     
     private void Update()
     {
         //Horizontal movement
+        //Сделать поворот быстрее
         horizontalInput = Input.GetAxis("Horizontal");
         if (!isRolling)
             body.velocity = new Vector2(horizontalInput * moveSpeed, body.velocity.y);
@@ -47,8 +47,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             shiftCountdown += Time.deltaTime; //timer to detect how long LShift is pressed
-            if (!isRolling && IsGrounded() && shiftCountdown > 0.3f) //if LShift is pressed longer than 0.3 sec, sprint
+            if (!isRolling && IsGrounded() && shiftCountdown > 0.3f && stamina.currentStamina > 0) //if LShift is pressed longer than 0.3 sec, sprint
+            {
                 body.velocity = new Vector2(horizontalInput * sprintSpeed, body.velocity.y);
+                animator.SetBool("Sprint", true);
+            }
+
+                
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift) && shiftCountdown < 0.3f) //if LShift is pressed longer than 0.3 sec
         {
@@ -56,14 +61,18 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(Roll());
         }
         else
+        {
+            animator.SetBool("Sprint", false);
             shiftCountdown = 0;
+        }
+            
 
         //Rotate character when moving
         if (horizontalInput > 0.01f)
-            transform.localScale = new Vector3(2, 2, 2);
+            transform.localScale = new Vector3(1.7f, 1.7f, 1.7f);
 
         if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-2, 2, 2);
+            transform.localScale = new Vector3(-1.7f, 1.7f, 1.7f);
 
         //Jump
         if (Input.GetKeyDown(KeyCode.Space))

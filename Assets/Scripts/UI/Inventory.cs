@@ -186,11 +186,25 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            AddInventoryItem(currentID, items[int.Parse(es.currentSelectedGameObject.name)]);
-
-            AddInventoryItem(int.Parse(es.currentSelectedGameObject.name), currentItem);
+            ItemInventory ii = items[int.Parse(es.currentSelectedGameObject.name)];
+            if (currentItem.id != ii.id)
+            {
+                AddInventoryItem(currentID, ii);
+                AddInventoryItem(int.Parse(es.currentSelectedGameObject.name), currentItem); 
+            }
+            else
+            {
+                if (ii.count + currentItem.count <= 128)
+                {
+                    ii.count += currentItem.count;
+                }
+                else
+                {
+                    AddItem(currentID, data.items[ii.id], ii.count + currentID - 128);
+                    ii.count = 128;
+                }
+            }
             currentID = -1;
-
             movingObject.gameObject.SetActive(false);
         }
     }

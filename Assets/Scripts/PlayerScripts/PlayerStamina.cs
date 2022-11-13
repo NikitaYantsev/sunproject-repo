@@ -23,5 +23,10 @@ public class PlayerStamina : MonoBehaviour
         {
             currentStamina -= Time.deltaTime * 6;
         }
+
+        if (animator.GetBool("Sprint"))
+        {
+            currentStamina -= Time.deltaTime * 3;
+        }
     }
 }

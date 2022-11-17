@@ -19,11 +19,6 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Collider2D interactiveObject = Physics2D.OverlapCircle(interactionPoint.position, interactionRange, interactiveLayer);
-        if (interactiveObject)
-        {
-           // interactiveObject.GetComponent<Interactable>().setActive();
-        }
 
     }
 }

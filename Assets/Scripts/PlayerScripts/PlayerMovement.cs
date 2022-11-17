@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private BoxCollider2D boxCollider;
 
+    public GameObject interactable;
+
     bool isRolling;
 
     
@@ -78,8 +80,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             Jump();
 
-        
-        //Roll
+
+        //Interaction
+        if (Input.GetKeyDown(KeyCode.E))
+        { }
 
 
         //Set animator parameters

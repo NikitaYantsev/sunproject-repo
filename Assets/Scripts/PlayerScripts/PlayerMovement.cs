@@ -20,8 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body;
     private Animator animator;
     private BoxCollider2D boxCollider;
-
-    public GameObject interactable;
+    private PlayerInteraction interactionScript;
 
     bool isRolling;
 
@@ -34,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         stamina = GetComponent<PlayerStamina>();
+        interactionScript = GetComponent<PlayerInteraction>();
         body.freezeRotation = true;
     }
     
@@ -83,7 +83,9 @@ public class PlayerMovement : MonoBehaviour
 
         //Interaction
         if (Input.GetKeyDown(KeyCode.E))
-        { }
+        {
+            interactionScript.Interact();
+        }
 
 
         //Set animator parameters

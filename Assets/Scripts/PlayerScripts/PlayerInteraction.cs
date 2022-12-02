@@ -17,11 +17,10 @@ public class PlayerInteraction : MonoBehaviour
                 print(interactable);
                 print(interactable.active);
                 interactable.Interaction();
-            }
-                
+            }     
         }
-            
     }
+
     public GameObject FindClosestInteractible()
     {
         GameObject[] interactibles;

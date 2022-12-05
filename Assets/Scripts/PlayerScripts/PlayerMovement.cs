@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool isRolling;
 
-    
+
     // private bool grounded;
     void Start()
     {
@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
         stamina = GetComponent<PlayerStamina>();
         interactionScript = GetComponent<PlayerInteraction>();
         body.freezeRotation = true;
+
+        transform.position = GameObject.FindGameObjectWithTag("startPos").transform.position;
     }
     
     private void Update()

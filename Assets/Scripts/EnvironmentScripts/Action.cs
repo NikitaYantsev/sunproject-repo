@@ -3,9 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class Action : MonoBehaviour
 {
-    void Start()
-    {
+    public void myAction() { 
         // Only specifying the sceneName or sceneBuildIndex will load the Scene with the Single mode
-        SceneManager.LoadScene("OtherSceneName", LoadSceneMode.Additive);
+        if (SceneManager.GetActiveScene().name == "Titles")
+            SceneManager.LoadScene("Room");
+        else if (SceneManager.GetActiveScene().name == "Room")
+            SceneManager.LoadScene("Titles");
     }
 }

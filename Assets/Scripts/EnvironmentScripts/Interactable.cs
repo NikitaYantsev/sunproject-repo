@@ -8,11 +8,13 @@ using UnityEngine.Rendering.Universal;
 public class Interactable : MonoBehaviour
 {
     MeshRenderer text;
+    Action action;
     public bool active = false;
 
     private void Awake()
     {
         text = GetComponentInChildren<MeshRenderer>();
+        action = GetComponent<Action>();
     }
 
     // Object triggers whenether the player is within an interaction range (interaction collider)
@@ -42,6 +44,7 @@ public class Interactable : MonoBehaviour
     // Add here what happens if the player interacts with an object
     public void Interaction()
     {
+        action.myAction();
         print("Interaction!");
     }
 }

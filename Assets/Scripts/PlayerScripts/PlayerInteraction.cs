@@ -14,8 +14,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             interactable = interactableObject.GetComponent<Interactable>();
             if (interactable.active) {
-                print(interactable);
-                print(interactable.active);
                 interactable.Interaction();
             }     
         }

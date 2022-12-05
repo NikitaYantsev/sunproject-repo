@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class Interactable : MonoBehaviour
 {
-    Light2D bulb;
+    MeshRenderer text;
     public bool active = false;
 
     private void Awake()
     {
-        bulb = gameObject.GetComponent<Light2D>();
+        text = GetComponentInChildren<MeshRenderer>();
     }
 
     // Object triggers whenether the player is within an interaction range (interaction collider)
@@ -22,6 +23,7 @@ public class Interactable : MonoBehaviour
         {
             print("Can interact");
             active = true;
+            text.enabled = true;
         }
 
     }
@@ -32,6 +34,7 @@ public class Interactable : MonoBehaviour
         {
             print("Cannot interact");
             active = false;
+            text.enabled = false;
         }
             
     }

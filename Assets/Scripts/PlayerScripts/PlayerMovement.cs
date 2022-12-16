@@ -1,7 +1,6 @@
 using System.Collections;
-using UnityEditor.UIElements;
 using UnityEngine;
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement: MonoBehaviour
 {
     float horizontalInput;
 
@@ -21,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private BoxCollider2D boxCollider;
     private PlayerInteraction interactionScript;
+    private QTEScript parryScript;
 
     bool isRolling;
 
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         stamina = GetComponent<PlayerStamina>();
         interactionScript = GetComponent<PlayerInteraction>();
+        parryScript = GetComponent<QTEScript>();
         body.freezeRotation = true;
 
         transform.position = GameObject.FindGameObjectWithTag("startPos").transform.position;
@@ -89,6 +90,11 @@ public class PlayerMovement : MonoBehaviour
             interactionScript.Interact();
         }
 
+        //Parry
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            parryScript.StartQTE("PlayerParry");
+        }
 
         //Set animator parameters
         animator.SetBool("isRunning", horizontalInput != 0);

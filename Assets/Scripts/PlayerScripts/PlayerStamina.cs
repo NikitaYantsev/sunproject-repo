@@ -19,12 +19,12 @@ public class PlayerStamina : MonoBehaviour
         if (currentStamina < maxStamina)
             currentStamina += Time.deltaTime;
 
-        if (animator.GetBool("isRolling"))
+        if (animator.GetBool("isRolling") && currentStamina > 0)
         {
             currentStamina -= Time.deltaTime * 6;
         }
 
-        if (animator.GetBool("Sprint"))
+        if (animator.GetBool("Sprint") && currentStamina > 0)
         {
             currentStamina -= Time.deltaTime * 3;
         }

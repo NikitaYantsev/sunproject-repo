@@ -91,9 +91,12 @@ public class PlayerMovement: MonoBehaviour
         }
 
         //Parry
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && animator.GetBool("isGrounded"))
         {
-            parryScript.StartQTE("PlayerParry");
+            body.velocity = new Vector2(0, 0);
+            horizontalInput = 0;
+            animator.SetBool("Sprint", false);
+            parryScript.StartQTE("PlayerParry", 1f);            
         }
 
         //Set animator parameters
@@ -135,8 +138,6 @@ public class PlayerMovement: MonoBehaviour
 
         isRolling = false;
         animator.SetBool("isRolling", isRolling);
-        
-        
     }
 
     private bool IsGrounded()

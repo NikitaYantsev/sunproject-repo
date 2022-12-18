@@ -45,8 +45,9 @@ public class QTEButtons : MonoBehaviour
         renderers[index].overrideSprite = pressedKeys[id];
     }
 
-    public void EraseButtons()
+    public IEnumerator EraseButtons()
     {
+        yield return new WaitForSeconds(0.1f);
         for (int button = 0; button < 3; button++)
         {
             renderers[button].enabled = false;

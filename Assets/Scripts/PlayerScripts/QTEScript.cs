@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -9,6 +11,7 @@ public class QTEScript : MonoBehaviour
     PlayerMovement controls;
     public QTEButtons visuals;
     List<KeyCode> buttons;
+    float timeLeft;
 
     KeyCode[] possibleButtons = { KeyCode.Q, KeyCode.A, KeyCode.Z, KeyCode.W, KeyCode.S, KeyCode.X, KeyCode.E, KeyCode.D, KeyCode.C,
                                    KeyCode.R, KeyCode.F, KeyCode.V, KeyCode.T, KeyCode.G, KeyCode.B};
@@ -29,6 +32,11 @@ public class QTEScript : MonoBehaviour
     {
         if (buttons.Count > 0)
         {
+            timeLeft -= Time.deltaTime;
+            if (timeLeft < 0)
+            {
+                Failure();
+            }
             controls.enabled = false;
             if (Input.anyKeyDown)
             {
@@ -40,23 +48,19 @@ public class QTEScript : MonoBehaviour
                     buttons.RemoveAt(0);
                     if (buttons.Count == 0) 
                     {
-                        visuals.EraseButtons();
-                        controls.enabled = true;
-                        print("U mad bro");
+                        Success();
                     }
                 }
                 else
                 {
-                    buttons.Clear();
-                    visuals.EraseButtons();
-                    controls.enabled = true;
+                    Failure();
                 }
             }
         }
     }
 
     //Define which keys can be used and then generate three
-    public void StartQTE(string purpose)
+    public void StartQTE(string purpose, float timeInSeconds)
     {
         if (buttons.Count == 0)
         {
@@ -70,6 +74,7 @@ public class QTEScript : MonoBehaviour
                     buttonsID[button] = index;
                 }
                 visuals.DrawButtons(buttonsID);
+                timeLeft = timeInSeconds;
             }          
         }        
     }
@@ -86,6 +91,26 @@ public class QTEScript : MonoBehaviour
         }
         
         return keysToPress;
-    }        
+    }
+    IEnumerator WaitAndReturnControls(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        controls.enabled = true; 
+    }
+
+    void Success()
+    {
+        StartCoroutine(visuals.EraseButtons());
+        StartCoroutine(WaitAndReturnControls(0.5f));
+        print("U mad bro");
+    }
+
+    void Failure()
+    {
+        buttons.Clear();
+        print("Shit bro");
+        StartCoroutine(visuals.EraseButtons());
+        StartCoroutine(WaitAndReturnControls(0.5f));
+    }
 }
 

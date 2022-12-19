@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Action : MonoBehaviour
+public class LoadNextScene : Interactable
 {
-    public void myAction() { 
+    public override void Interaction()
+    {
         // Only specifying the sceneName or sceneBuildIndex will load the Scene with the Single mode
         if (SceneManager.GetActiveScene().name == "Titles")
             SceneManager.LoadScene("Room");

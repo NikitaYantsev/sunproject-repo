@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public abstract class Interactable : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
     MeshRenderer text;
     public bool active = false;
@@ -39,7 +39,7 @@ public abstract class Interactable : MonoBehaviour
             
     }
 
-    // Add here what happens if the player interacts with an object
+    // Override in script what happens if the player interacts with an object
     public virtual void Interaction()
     {
         print("Interaction!");

@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     public Animator animator;
     public Rigidbody2D body;
+    [SerializeField] float balanceBound;
 
     void Start()
     {
@@ -17,11 +18,13 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, float balanceDamage)
     {
         currentHealth -= damage;
-        animator.SetTrigger("Hurt");
-
+        if (balanceDamage > balanceBound)
+        {
+            animator.SetTrigger("Hurt");
+        }
         if (currentHealth <= 0)
         {
             Die();
@@ -31,9 +34,11 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         print("You dead");
-        animator.SetBool("IsDead", true);
         GetComponent<Collider2D>().enabled = false;
         GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<PlayerAttack>().enabled = false;
+        animator.SetBool("isRunning", false);
+        animator.SetBool("IsDead", true);
         body.gravityScale = 0;
         body.velocity = Vector3.zero;
         this.enabled = false;

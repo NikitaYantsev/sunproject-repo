@@ -16,6 +16,7 @@ public class EnemyMovement : StateMachineBehaviour
     BanditEnemyDetection detection;
     Rigidbody2D body;
     EnemyRotate rotate;
+    DefenceMode defenceTrigger;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -24,6 +25,7 @@ public class EnemyMovement : StateMachineBehaviour
         rotate = animator.GetComponent<EnemyRotate>();
         detection = animator.GetComponent<BanditEnemyDetection>();
         transform = animator.GetComponent<Transform>();
+        defenceTrigger = animator.GetComponent<DefenceMode>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -39,11 +41,15 @@ public class EnemyMovement : StateMachineBehaviour
         }
         else
         {
+            defenceTrigger.TriggerDefence(2);
             animator.SetBool("inBattle", inBattle);
             rotate.LookAtPlayer();
-            Vector2 target = new(player.position.x, body.position.y);
-            Vector2 newPos = Vector2.MoveTowards(body.position, target, speed * 2 * Time.fixedDeltaTime);
-            body.MovePosition(newPos);
+            if ((Vector2.Distance(player.position, body.position) > attackRange)) 
+            {
+                Vector2 target = new(player.position.x, body.position.y);
+                Vector2 newPos = Vector2.MoveTowards(body.position, target, speed * 2 * Time.fixedDeltaTime);
+                body.MovePosition(newPos);
+            }
             if (Vector2.Distance(player.position, body.position) <= attackRange)
                 animator.SetTrigger("Attack");
         }

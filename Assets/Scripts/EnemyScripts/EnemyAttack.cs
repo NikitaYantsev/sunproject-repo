@@ -6,8 +6,8 @@ public class EnemyAttack : MonoBehaviour
 {
     public Transform attackPoint;
     [SerializeField] float attackRange = 1;
+    [SerializeField] float balanceDamage;
     public LayerMask playerLayer;
-
     public float attackDamage;
 
 
@@ -16,7 +16,7 @@ public class EnemyAttack : MonoBehaviour
         Collider2D player = Physics2D.OverlapCircle(attackPoint.position, attackRange, playerLayer);
         if (player != null)
         {
-            player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            player.GetComponent<PlayerHealth>().TakeDamage(attackDamage, balanceDamage);
         }
     }
     private void OnDrawGizmos()

@@ -4,19 +4,22 @@ public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
     public Transform attackPoint;
-    public float attackRange = 0.5f;
+
+    Face currentWeapon;    // !!Change here to test new weapon!!
+
     float attackTiming;
     public LayerMask enemyLayer;
     bool doSecondAttack;
     bool doThirdAttack;
-    public float attackDamage = 40;
     public float lowBracket = 0.5f;
     public float highBracket = 0.6f;
     //KeyCode lastKeyCode;
 
-    private void Awake()
+    private void Start()
     {
         animator = GetComponent<Animator>();
+        //Consider making PlayerStats class and take damage and other values from there
+        currentWeapon = GetComponent<Face>(); // !!Change here to test new weapon!!
     }
 
     // Update is called once per frame  
@@ -32,6 +35,12 @@ public class PlayerAttack : MonoBehaviour
                 AttackController();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            currentWeapon.SpecialAttack();
+        }
+
         attackTiming += Time.deltaTime;
     }   
 
@@ -40,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
         //third attack
         if (doThirdAttack && attackTiming > lowBracket && attackTiming < highBracket)
         {
-            Attack(3);
+            currentWeapon.FinalAttackInCombo(currentWeapon.Damage, currentWeapon.AttackRange);
             doThirdAttack = false;
             return;
         }
@@ -54,7 +63,7 @@ public class PlayerAttack : MonoBehaviour
         //second attack
         if (doSecondAttack && attackTiming > lowBracket && attackTiming < highBracket)
         {
-            Attack(2);
+            Attack(2, currentWeapon.Damage, currentWeapon.AttackRange, currentWeapon.BalanceDamage);
             doThirdAttack = true;
             return;
         }
@@ -67,13 +76,13 @@ public class PlayerAttack : MonoBehaviour
         //first attack
         if (!doSecondAttack)
         { 
-            Attack(1);
+            Attack(1, currentWeapon.Damage, currentWeapon.AttackRange, currentWeapon.BalanceDamage);
             doSecondAttack = true;
             return;
         }
     }
     
-    void Attack(int attackType) 
+    public void Attack(int attackType, float attackDamage, float attackRange, float balanceDamage) 
     {
         switch (attackType)
         {
@@ -91,7 +100,7 @@ public class PlayerAttack : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
+            enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage, balanceDamage);
         }
         attackTiming = 0;
     }
@@ -102,6 +111,6 @@ public class PlayerAttack : MonoBehaviour
         {
             return;
         }
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        //Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

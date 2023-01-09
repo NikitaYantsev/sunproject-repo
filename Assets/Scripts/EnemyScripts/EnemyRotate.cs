@@ -6,7 +6,7 @@ public class EnemyRotate : MonoBehaviour
 {
     public Transform player;
     bool inBattle;
-    bool isFlipped = false;
+    bool isFlipped = true;
     public void LookAtPlayer()
     {
         Vector3 flipped = transform.localScale;

@@ -13,18 +13,23 @@ public class QTEScript : MonoBehaviour
     List<KeyCode> buttons;
     float timeLeft;
 
+    Face currentWeapon;    // !!Change here to test new weapon!!
+
     KeyCode[] possibleButtons = { KeyCode.Q, KeyCode.A, KeyCode.Z, KeyCode.W, KeyCode.S, KeyCode.X, KeyCode.E, KeyCode.D, KeyCode.C,
                                    KeyCode.R, KeyCode.F, KeyCode.V, KeyCode.T, KeyCode.G, KeyCode.B};
-
+    
+    //Can add here another types if other QTE-modes needed
     enum Type : int
     {
         PlayerParry = 3
     }
 
-    void Awake()
+    void Start()
     {
         controls = GetComponent<PlayerMovement>();
-        buttons = new List<KeyCode>(); 
+        buttons = new List<KeyCode>();
+
+        currentWeapon = GetComponent<Face>(); // !!Change here to test new weapon!!
     }
 
     //Blocks controls while keys for QTE exists
@@ -32,12 +37,13 @@ public class QTEScript : MonoBehaviour
     {
         if (buttons.Count > 0)
         {
-            timeLeft -= Time.deltaTime;
+            timeLeft -= Time.unscaledDeltaTime;
             if (timeLeft < 0)
             {
                 Failure();
             }
             controls.enabled = false;
+            Time.timeScale = 0f;
             if (Input.anyKeyDown)
             {
                 if (Input.GetKeyDown(buttons[0]))
@@ -60,7 +66,7 @@ public class QTEScript : MonoBehaviour
     }
 
     //Define which keys can be used and then generate three
-    public void StartQTE(string purpose, float timeInSeconds)
+    public void StartQTE(string purpose = "PlayerParry", float timeInSeconds = 2f)
     {
         if (buttons.Count == 0)
         {
@@ -94,7 +100,8 @@ public class QTEScript : MonoBehaviour
     }
     IEnumerator WaitAndReturnControls(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        yield return new WaitForSecondsRealtime(seconds);
+        Time.timeScale = 1;
         controls.enabled = true; 
     }
 
@@ -102,7 +109,7 @@ public class QTEScript : MonoBehaviour
     {
         StartCoroutine(visuals.EraseButtons());
         StartCoroutine(WaitAndReturnControls(0.5f));
-        print("U mad bro");
+        currentWeapon.AttackAfterSuccessfullParry();
     }
 
     void Failure()

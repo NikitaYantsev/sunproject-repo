@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -25,23 +26,35 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame  
     void Update()
     {
-        if (attackTiming > lowBracket)
+        if (Input.GetKeyDown(KeyCode.Mouse0)) 
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (attackTiming > lowBracket)
             {
-                //print("Second attack = " + doSecondAttack);
-                //print("Third attack = "+ doThirdAttack);
-            
                 AttackController();
             }
+            
         }
+        attackTiming += Time.deltaTime;
+
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
+            currentWeapon.SlowDownPlayer();
+
+        if (Input.GetKey(KeyCode.Mouse1))
         {
+            print("Key pressed");
             currentWeapon.SpecialAttack();
         }
 
-        attackTiming += Time.deltaTime;
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            print("Key released");
+            currentWeapon.ResetPlayer(); 
+        }
+          
+
+
+        
     }   
 
     void AttackController()
@@ -96,7 +109,7 @@ public class PlayerAttack : MonoBehaviour
                 animator.SetTrigger("Attack3");
                 break;
         }
-        
+        print(attackRange);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -105,12 +118,17 @@ public class PlayerAttack : MonoBehaviour
         attackTiming = 0;
     }
 
+    public Collider2D[] GetEnemies(float attackRange)
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        return hitEnemies;
+    }
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
         {
             return;
         }
-        //Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(attackPoint.position, 1);
     }
 }

@@ -7,15 +7,24 @@ using UnityEngine;
 public class Face : MonoBehaviour
 { 
     PlayerAttack playerAttack;
+    PlayerMovement playerMovement;
 
     private void Start()
     {
         playerAttack = GetComponent<PlayerAttack>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     public float Damage = 30;
-    public float AttackRange = 10;
+    public float AttackRange = 1;
     public float BalanceDamage = 20;
+    float intervalFromLastSA;
+
+    private void Update()
+    {
+        if (intervalFromLastSA < 1f)
+            intervalFromLastSA += Time.deltaTime;
+    }
 
     public void FinalAttackInCombo(float damage, float attackRange)
     {
@@ -34,7 +43,28 @@ public class Face : MonoBehaviour
 
     public void SpecialAttack()
     {
-        print("Special attack");
+        if (intervalFromLastSA > 0.5f)
+        {
+            intervalFromLastSA = 0f;
+            print("Special Attack!!");
+            Collider2D[] enemiesInRange = playerAttack.GetEnemies(AttackRange);
+            foreach (Collider2D enemy in enemiesInRange)
+            {
+                enemy.GetComponent<EnemyHealth>().TakeDamage(Damage * 0.01f, BalanceDamage);
+                enemy.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.5f * transform.localScale.x, 0f), ForceMode2D.Impulse);
+            }
+        }
+
+    }
+
+    public void SlowDownPlayer()
+    {
+        playerMovement.moveSpeed = 3.5f;
+    }
+
+    public void ResetPlayer()
+    {
+        playerMovement.moveSpeed = 7f;
     }
 
     public void AttackAfterSuccessfullParry()

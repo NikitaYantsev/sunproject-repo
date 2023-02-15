@@ -8,12 +8,15 @@ using UnityEngine;
 
 public class QTEScript : MonoBehaviour
 {
-    PlayerMovement controls;
+    PlayerMovement mov_controls;
+    PlayerUtilityControls ut_controls;
+    PlayerAttack attack;
+    Animator animator;
+    Face weapon;
+    Collider2D closestEnemy;
     public QTEButtons visuals;
     List<KeyCode> buttons;
     float timeLeft;
-
-    Face currentWeapon;    // !!Change here to test new weapon!!
 
     KeyCode[] possibleButtons = { KeyCode.Q, KeyCode.A, KeyCode.Z, KeyCode.W, KeyCode.S, KeyCode.X, KeyCode.E, KeyCode.D, KeyCode.C,
                                    KeyCode.R, KeyCode.F, KeyCode.V, KeyCode.T, KeyCode.G, KeyCode.B};
@@ -26,10 +29,12 @@ public class QTEScript : MonoBehaviour
 
     void Start()
     {
-        controls = GetComponent<PlayerMovement>();
+        mov_controls = GetComponent<PlayerMovement>();
+        ut_controls = GetComponent<PlayerUtilityControls>();
+        attack = GetComponent<PlayerAttack>();
+        weapon = GetComponent<Face>();
+        animator = GetComponent<Animator>();
         buttons = new List<KeyCode>();
-
-        currentWeapon = GetComponent<Face>(); // !!Change here to test new weapon!!
     }
 
     //Blocks controls while keys for QTE exists
@@ -42,7 +47,8 @@ public class QTEScript : MonoBehaviour
             {
                 Failure();
             }
-            controls.enabled = false;
+            mov_controls.enabled = false;
+            ut_controls.enabled = false;
             Time.timeScale = 0f;
             if (Input.anyKeyDown)
             {
@@ -65,8 +71,48 @@ public class QTEScript : MonoBehaviour
         }
     }
 
+    public void CheckAndParryOne()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attack.attackPoint.position, weapon.AttackRange, attack.enemyLayer);
+        List<Collider2D> enemiesThatCanBeParried = new List<Collider2D>();
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            EnemyState enemyStats = enemy.GetComponent<EnemyState>();
+            if (enemyStats.canBeParried)
+                enemiesThatCanBeParried.Add(enemy);
+        }
+        if (enemiesThatCanBeParried.Count > 0)
+        {
+            StartQTE();
+            closestEnemy = FindClosestEnemy(enemiesThatCanBeParried);
+        }
+        else
+        {
+            print("LOSER");
+            animator.SetTrigger("UnsuccessfulParry");
+        }
+    }
+
+    Collider2D FindClosestEnemy(List<Collider2D> enemiesArray)
+    {
+        Collider2D closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (Collider2D enemy in enemiesArray)
+        {
+            Vector3 diff = enemy.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = enemy;
+                distance = curDistance;
+            }
+        }
+        return closest;
+    }
+
     //Define which keys can be used and then generate three
-    public void StartQTE(string purpose = "PlayerParry", float timeInSeconds = 2f)
+    public void StartQTE(string purpose = "PlayerParry", float timeInSeconds = 3f)
     {
         if (buttons.Count == 0)
         {
@@ -102,14 +148,18 @@ public class QTEScript : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(seconds);
         Time.timeScale = 1;
-        controls.enabled = true; 
+        mov_controls.enabled = true;
+        ut_controls.enabled = true;
     }
 
     void Success()
     {
         StartCoroutine(visuals.EraseButtons());
-        StartCoroutine(WaitAndReturnControls(0.5f));
-        currentWeapon.AttackAfterSuccessfullParry();
+        Animator enemy_animator = closestEnemy.GetComponent<Animator>();
+        StartCoroutine(WaitAndReturnControls(1f));
+        animator.SetTrigger("SuccessfulParry");
+        enemy_animator.SetTrigger("GotParried");
+        weapon.AttackAfterSuccessfullParry();
     }
 
     void Failure()
@@ -117,7 +167,8 @@ public class QTEScript : MonoBehaviour
         buttons.Clear();
         print("Shit bro");
         StartCoroutine(visuals.EraseButtons());
-        StartCoroutine(WaitAndReturnControls(0.5f));
+        StartCoroutine(WaitAndReturnControls(1f));
+        animator.SetTrigger("UnsuccessfulParry");
     }
 }
 

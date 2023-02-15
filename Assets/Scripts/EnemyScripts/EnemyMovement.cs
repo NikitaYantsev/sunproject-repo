@@ -9,8 +9,7 @@ using UnityEngine.Animations;
 public class EnemyMovement : StateMachineBehaviour
 {
     public float speed = -5f;
-    public float attackRange = 3f;
-    bool inBattle = false;
+    public bool inBattle = false;
     public Transform player;
     Transform transform;
     BanditEnemyDetection detection;
@@ -44,14 +43,9 @@ public class EnemyMovement : StateMachineBehaviour
             defenceTrigger.TriggerDefence(2);
             animator.SetBool("inBattle", inBattle);
             rotate.LookAtPlayer();
-            if ((Vector2.Distance(player.position, body.position) > attackRange)) 
-            {
-                Vector2 target = new(player.position.x, body.position.y);
-                Vector2 newPos = Vector2.MoveTowards(body.position, target, speed * 2 * Time.fixedDeltaTime);
-                body.MovePosition(newPos);
-            }
-            if (Vector2.Distance(player.position, body.position) <= attackRange)
-                animator.SetTrigger("Attack");
+            Vector2 target = new(player.position.x, body.position.y);
+            Vector2 newPos = Vector2.MoveTowards(body.position, target, speed * 2 * Time.fixedDeltaTime);
+            body.MovePosition(newPos);           
         }
     }
 

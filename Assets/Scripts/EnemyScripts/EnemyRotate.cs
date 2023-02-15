@@ -6,9 +6,19 @@ public class EnemyRotate : MonoBehaviour
 {
     public Transform player;
     bool inBattle;
-    bool isFlipped = true;
+    bool isFlipped;
+
+    private void Start()
+    {
+        //check if we need to rotate 
+        if (transform.localScale.x > 0)
+            isFlipped = false;
+        else
+            isFlipped = true;
+    }
     public void LookAtPlayer()
     {
+
         Vector3 flipped = transform.localScale;
         flipped.z *= -1f;
         inBattle = true; // this function gets called only in battle mode

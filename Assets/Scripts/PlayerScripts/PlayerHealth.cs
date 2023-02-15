@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     public float maxHealth = 3;
     public float currentHealth;
+    //Change it through parry animation later!!
+    public bool invulnerable = false;
     public Animator animator;
     public Rigidbody2D body;
     [SerializeField] float balanceBound;
@@ -20,14 +22,17 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage, float balanceDamage)
     {
-        currentHealth -= damage;
-        if (balanceDamage > balanceBound)
+        if (!invulnerable)
         {
-            animator.SetTrigger("Hurt");
-        }
-        if (currentHealth <= 0)
-        {
-            Die();
+            currentHealth -= damage;
+            if (balanceDamage > balanceBound)
+            {
+                animator.SetTrigger("Hurt");
+            }
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 

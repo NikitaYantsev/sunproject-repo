@@ -32,7 +32,6 @@ public class PlayerAttack : MonoBehaviour
             {
                 AttackController();
             }
-            
         }
         attackTiming += Time.deltaTime;
 
@@ -51,10 +50,6 @@ public class PlayerAttack : MonoBehaviour
             print("Key released");
             currentWeapon.ResetPlayer(); 
         }
-          
-
-
-        
     }   
 
     void AttackController()
@@ -109,7 +104,6 @@ public class PlayerAttack : MonoBehaviour
                 animator.SetTrigger("Attack3");
                 break;
         }
-        print(attackRange);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {

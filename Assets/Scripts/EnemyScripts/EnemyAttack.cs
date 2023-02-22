@@ -9,6 +9,7 @@ public class EnemyAttack : MonoBehaviour
     public Transform player;
     Animator animator;
     Rigidbody2D body;
+    bool isAttacking = false;
     [SerializeField] public float attackRange;
     [SerializeField] float balanceDamage;
     public LayerMask playerLayer;
@@ -26,10 +27,11 @@ public class EnemyAttack : MonoBehaviour
 
     private void Update()
     {
-        print(Vector2.Distance(player.position, body.position));
-        if (Vector2.Distance(player.position, body.position) <= attackRange)
+
+        if (Vector2.Distance(player.position, body.position) <= attackRange && !isAttacking)
         {
-            
+            print(Vector2.Distance(player.position, body.position) + " <= " + attackRange);
+            print("Attack");
             animator.SetTrigger("Attack");
         }
     }
@@ -52,6 +54,18 @@ public class EnemyAttack : MonoBehaviour
     {
         stats.canBeParried = false;
     }
+
+    public void CanAttack() 
+    {
+        isAttacking = false;
+    }
+
+    public void CannotAttack()
+    {
+        isAttacking = true;
+    }
+
+
 
     private void OnDrawGizmos()
     {

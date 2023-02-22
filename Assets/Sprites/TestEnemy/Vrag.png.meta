@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bc8bb2ae81e4e4e4ba8a8c4bb8f438d3
+guid: 5f7dd641ef7afa041894ddd63f806124
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,10 +117,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprites-image_0
+      name: Vrag_0
       rect:
         serializedVersion: 2
-        x: 42
+        x: 34
         y: 22
         width: 26
         height: 65
@@ -131,17 +131,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3e133a562d612c4ba0758c70c0d9ec5
-      internalID: 1007002744
+      spriteID: fa689fd375c080a43ac0fc65affe3b92
+      internalID: 108238881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprites-image_1
+      name: Vrag_1
       rect:
         serializedVersion: 2
-        x: 144
+        x: 136
         y: 22
         width: 26
         height: 65
@@ -152,185 +152,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db92ba486eaaba049af1de035127a660
-      internalID: 1125889031
+      spriteID: aecd0515924dfc14d961403b90a87c0f
+      internalID: -1473932509
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprites-image_2
+      name: Vrag_2
       rect:
         serializedVersion: 2
-        x: 242
-        y: 22
-        width: 30
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f6a788b810b8d9b43920f5c6525348df
-      internalID: 2033594288
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites-image_3
-      rect:
-        serializedVersion: 2
-        x: 338
-        y: 22
-        width: 37
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2138865d33bde6e4a9dee0a5e179f4ea
-      internalID: -350167283
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites-image_4
-      rect:
-        serializedVersion: 2
-        x: 432
-        y: 26
-        width: 51
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e0383487562deab43baaf2b42099e600
-      internalID: 1733447350
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites-image_5
-      rect:
-        serializedVersion: 2
-        x: 538
-        y: 22
-        width: 44
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9c5e5a7e1db519a4a9c77781e24a9500
-      internalID: -312564200
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites-image_6
-      rect:
-        serializedVersion: 2
-        x: 643
-        y: 22
-        width: 39
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db841440c71cab442af00e09f0fab14b
-      internalID: -1701781336
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites-image_7
-      rect:
-        serializedVersion: 2
-        x: 745
-        y: 23
-        width: 43
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f074c25399a359c4b9e0b9d8d6459728
-      internalID: 1599056920
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites-image_8
-      rect:
-        serializedVersion: 2
-        x: 848
-        y: 23
-        width: 47
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 75725df0c63d1604ab05474946f2d0a2
-      internalID: 833627273
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites-image_9
-      rect:
-        serializedVersion: 2
-        x: 950
-        y: 22
-        width: 41
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 856ac73e5bad3334bb9bf2dbd67b076c
-      internalID: -1230075833
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites-image_10
-      rect:
-        serializedVersion: 2
-        x: 1047
+        x: 237
         y: 22
         width: 42
         height: 63
@@ -341,17 +173,185 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a9919e68935a8446bc93074afba7034
-      internalID: 1034121991
+      spriteID: 3a9ba83632dae4845be7f564a5bf7207
+      internalID: 1036968311
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprites-image_11
+      name: Vrag_3
       rect:
         serializedVersion: 2
-        x: 1164
+        x: 335
+        y: 22
+        width: 41
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4363992cb528084fbf141e792c32843
+      internalID: -2055152262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vrag_4
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 23
+        width: 47
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c361ccbfdce4734c984b28d08c5bd31
+      internalID: -211324245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vrag_5
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 23
+        width: 43
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a83cc8a15d7c5340929496d61fac1e0
+      internalID: -1745249290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vrag_6
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 22
+        width: 39
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03f74e9238096294fb134c28ce799912
+      internalID: 1727088292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vrag_7
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 22
+        width: 44
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c3eeb6608b34cf48a722172ea159cd0
+      internalID: 1712403289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vrag_8
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 26
+        width: 51
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 119c2cbc63e61e24f8d093306faa524d
+      internalID: -1724953322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vrag_9
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 22
+        width: 37
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49a6f07fbdbc062499f860f6526f1adc
+      internalID: -1385418905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vrag_10
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 22
+        width: 30
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02408030a3a2fe341962f4252ace2dc5
+      internalID: -1947156923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vrag_11
+      rect:
+        serializedVersion: 2
+        x: 1156
         y: 22
         width: 26
         height: 65
@@ -362,17 +362,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e206b08e79d4c2e47a1b512cc7ea7509
-      internalID: 1749145758
+      spriteID: 74b0fa2f6c15c484cb51f2f4feab8747
+      internalID: -115091410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprites-image_12
+      name: Vrag_12
       rect:
         serializedVersion: 2
-        x: 1266
+        x: 1258
         y: 22
         width: 26
         height: 65
@@ -383,8 +383,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbd8c32c42b7f9f4a9911f1233de7767
-      internalID: -904095026
+      spriteID: 80cfdccb4a320b249a38a6afdd09924b
+      internalID: -961510612
       vertices: []
       indices: 
       edges: []
@@ -400,19 +400,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprites-image_8: 833627273
-      sprites-image_7: 1599056920
-      sprites-image_9: -1230075833
-      sprites-image_2: 2033594288
-      sprites-image_1: 1125889031
-      sprites-image_4: 1733447350
-      sprites-image_5: -312564200
-      sprites-image_10: 1034121991
-      sprites-image_6: -1701781336
-      sprites-image_3: -350167283
-      sprites-image_11: 1749145758
-      sprites-image_12: -904095026
-      sprites-image_0: 1007002744
+      Vrag_1: -1473932509
+      Vrag_7: 1712403289
+      Vrag_0: 108238881
+      Vrag_2: 1036968311
+      Vrag_11: -115091410
+      Vrag_9: -1385418905
+      Vrag_5: -1745249290
+      Vrag_8: -1724953322
+      Vrag_10: -1947156923
+      Vrag_3: -2055152262
+      Vrag_12: -961510612
+      Vrag_4: -211324245
+      Vrag_6: 1727088292
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

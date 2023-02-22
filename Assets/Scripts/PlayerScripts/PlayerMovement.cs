@@ -38,7 +38,7 @@ public class PlayerMovement: MonoBehaviour
         //Find position in the scene where to instantiate character
         transform.position = GameObject.FindGameObjectWithTag("startPos").transform.position;
     }
-    
+
     private void Update()
     {
         //Horizontal movement
@@ -66,14 +66,21 @@ public class PlayerMovement: MonoBehaviour
         {
             animator.SetBool("Sprint", false); //when Shift get released stop sprinting (in any case) and reset coundown
             shiftCountdown = 0;
-        }    
+        }
+
 
         //Rotate character when moving
         if (horizontalInput > 0.01f)
-            transform.localScale = new Vector3(1f, 1f, 1f);
+        {
+            print(horizontalInput);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+
 
         if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+        {
+            print(horizontalInput);
+            transform.localScale = new Vector3(1f, 1f, 1f); }
 
         //Jump
         if (Input.GetKeyDown(KeyCode.Space))

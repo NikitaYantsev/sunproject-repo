@@ -43,20 +43,20 @@ public class DefenceMode : MonoBehaviour
 
     public void Defence()
     {
-        if (type == Type.ReduceDamage)
+        switch (type)
         {
-            health.damageResist += damageReducePercent;
-        }
-
-        if (type == Type.AllowParry)
-        {
-            health.parryAllowed = true;
-            health.parryChance = this.parryChance;
-        }
-
-        if (type == Type.SpecialAttack)
-        {
-            print("Do something cool!");
+            case Type.ReduceDamage:
+                health.damageResist += damageReducePercent;
+                break;
+            case Type.AllowParry:
+                health.parryAllowed = true;
+                health.parryChance = this.parryChance;
+                break;
+            case Type.SpecialAttack:
+                print("Do something cool!");
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 }

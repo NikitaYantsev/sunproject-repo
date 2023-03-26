@@ -5,47 +5,81 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Test : MonoBehaviour
-{
-    private Collider2D _collider;
-    private Transform _body;
-    private float _leftCoordinate;
-    private float _rightCoordinate;
-    private int[] _percentageArray;
-    private float step;
-    
+{   
+    private Collider2D collider;
+    private SpriteRenderer spriteRenderer;
+    private float rightCoordinate;
+    private float leftCoordinate;
+    private Vector3 lastMousePos;
+    private float timePassed;
+    private bool win;
+    private bool loose;
+
     // Start is called before the first frame update
     private void Start()
     {
-        _collider = GetComponent<Collider2D>();
-        _body = GetComponent<Transform>();
-        var bounds = _collider.bounds;
-        _leftCoordinate = bounds.min.x;
-        _rightCoordinate = bounds.max.x;
-        step = Math.Abs(_rightCoordinate - _leftCoordinate) / 100;
-        _percentageArray = new int[100];
+        Color test = Color.blue;
+        print(test);
+        collider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        //_body = GetComponent<Transform>();
+        var bounds = collider.bounds;
+        //_leftCoordinate = bounds.min.x;
+        rightCoordinate = bounds.max.x;
+        leftCoordinate = bounds.min.x;
     }
-
-    // Update is called once per frame
-    private void OnMouseDrag()
+    private void OnMouseOver()
     {
+        if (win || loose) return;
+        spriteRenderer.color = Color.yellow;
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (mousePos.x >= rightCoordinate - (rightCoordinate - leftCoordinate) * 0.1)
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            int currentPercent = (int)((mousePos.x - _leftCoordinate) / step);
-            print($"{mousePos.x} - {_leftCoordinate} / {step}");
-            print(currentPercent);
-            if (currentPercent < 99)
-            {
-                _percentageArray[currentPercent] = 1;
-            }
-
+            Result(true);
+            win = true;
         }
+        timePassed += Time.deltaTime;
+        print(timePassed);
+        if (timePassed >= 1f)
+            Result(false);
     }
 
     private void OnMouseExit()
     {
-        foreach (var i in _percentageArray)
+        if (win || loose) return;
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (mousePos.x >= rightCoordinate)
         {
-            print(string.Join(' ', _percentageArray));
+            Result(true);
+            return;
         }
+            Result(false);
     }
+
+    private void Result(bool flag)
+    {
+        spriteRenderer.color = flag ? Color.green : Color.red;
+        win = flag;
+        loose = !flag;
+    }
+    // Update is called once per frame
+    /*
+    private void OnMouseDrag()
+    {
+        if (timePassed >= 0.2f && timePassed <= 2f)
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            while (timePassed <= 2f && (lastMousePos - mousePos).x > 0)
+            {
+                if (mousePos.x >= rightCoordinate - (rightCoordinate - leftCoordinate) * 0.1)
+                {
+                    flag = true;
+                }
+            }
+        
+            spriteRenderer.color = flag ? Color.green : Color.red;
+        }
+        timePassed += Time.deltaTime;
+    }
+    */
 }

@@ -8,7 +8,6 @@ public class MouseParryTest : MonoBehaviour
     void Start()
     {
         Transform init_pos = GetComponentInParent<Transform>();
-        print(init_pos.position);
     }
 
     // Update is called once per frame

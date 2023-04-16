@@ -125,7 +125,7 @@ public class QTEScript : MonoBehaviour
                     int index = Array.IndexOf(possibleButtons, buttons[button]);
                     buttonsID[button] = index;
                 }
-                visuals.DrawButtons(buttonsID);
+                visuals.DrawLine(buttonsID);
                 timeLeft = timeInSeconds;
             }          
         }        

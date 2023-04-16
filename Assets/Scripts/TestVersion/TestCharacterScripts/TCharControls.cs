@@ -11,21 +11,21 @@ public class TCharControls : MonoBehaviour
 
     private Rigidbody2D body;
     private Animator animator;
-    private TQTEScript parryScript;
+    private ParryScript parryScript;
 
     void Start()
     {
         //Grab components from other objects
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        parryScript = GetComponent<TQTEScript>();
+        parryScript = GetComponent<ParryScript>();
         body.freezeRotation = true;
     }
 
     private void Update()
     {
         //Horizontal movement
-        //Сделать поворот быстрее
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(horizontalInput * moveSpeed, body.velocity.y);
 

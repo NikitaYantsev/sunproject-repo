@@ -30,8 +30,8 @@ public class EnemyAttack : MonoBehaviour
 
         if (Vector2.Distance(player.position, body.position) <= attackRange && !isAttacking)
         {
-            print(Vector2.Distance(player.position, body.position) + " <= " + attackRange);
-            print("Attack");
+            //print(Vector2.Distance(player.position, body.position) + " <= " + attackRange);
+            //print("Attack");
             animator.SetTrigger("Attack");
         }
     }

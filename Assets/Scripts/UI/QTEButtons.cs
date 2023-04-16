@@ -28,7 +28,7 @@ public class QTEButtons : MonoBehaviour
         renderers = new UnityEngine.UI.Image[] { renderer1, renderer2, renderer3 };
     }
 
-    public void DrawButtons(int[] id)
+    public void DrawLine(int[] id)
     {
         for (int button = 0; button < 3; button++)
         {

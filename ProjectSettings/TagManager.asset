@@ -8,6 +8,8 @@ TagManager:
   - Interaction
   - Interactable
   - startPos
+  - HorizontalLine
+  - VerticalLine
   layers:
   - Default
   - TransparentFX
